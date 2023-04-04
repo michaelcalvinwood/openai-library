@@ -104,7 +104,7 @@ async function generateBlogPost (topic, keywords, specialInstructions) {
     The response should include the keywords as many times as possible.
     ${specialInstructions}
     Also generate a list of tags that include the important words and phrases in the response. 
-    The list of tags must also include the names of all people, places, companies, and organizations mentioned in the response.
+    The list of tags must also include the names of all people, products, services, places, companies, and organizations mentioned in the response.
     The return format must be stringified JSON in the following format: {
         "postContent": post content here
         "title": title goes here
@@ -116,7 +116,7 @@ async function generateBlogPost (topic, keywords, specialInstructions) {
     The response should include an HTML title and meta description that both include the keywords.
     The response should include the keywords as many times as possible.
     Also generate a list of tags that include the important words and phrases in the response. 
-    The list of tags must also include the names of all people, places, companies, and organizations mentioned in the response.
+    The list of tags must also include the names of all people, places, products, services, companies, and organizations mentioned in the response.
     The return format must be stringified JSON in the following format: {
         "postContent": post content here
         "title": title goes here
