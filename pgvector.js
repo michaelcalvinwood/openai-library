@@ -1,5 +1,6 @@
 /*
  * See Linux Utilities repo for auto installing and auto configuring postgres database on Ubuntu 22.04
+ * For additional pgvector query options and optimizations see: https://pgxn.org/dist/vector/
  */
 
 require('dotenv').config();
@@ -31,6 +32,13 @@ function splitWords(string, chunk = 400, overlap = 200) {
   return text;
 }; 
 
+const createPgvectorTable = async table => {
+    let q = `CREATE TABLE ${table} (id serial primary key, body text not null, embedding vector(1536));`;
+    await pgClient.query(q);   
+    q = `CREATE INDEX ON ${table} USING ivfflat (embedding vector_l2_ops)`;
+    await pgClient.query(q);   
+}
+
 const getEmbedding = async (input) => {
   const configuration = new Configuration({
       apiKey: process.env.OPENAI_API_KEY,
@@ -45,10 +53,10 @@ const getEmbedding = async (input) => {
     return embedding;
 }
 
-const insertEmbedding = async (string) => {
+const insertEmbedding = async (string, table = 'posts') => {
   try {
     const embedding = await getEmbedding (string);
-    const q = `INSERT INTO posts (body, embedding) VALUES ('${string}', '${[pgvector.toSql(embedding)]}')`;
+    const q = `INSERT INTO ${table} (body, embedding) VALUES ('${string}', '${[pgvector.toSql(embedding)]}')`;
     await pgClient.query(q);   
   } catch (error) {
     console.log(error);
@@ -57,11 +65,17 @@ const insertEmbedding = async (string) => {
   return true;
 }
 
-const getNearestNeighbors = async (string) => {
+const getNearestNeighbors = async (string, table = 'posts') => {
   const embedding = await getEmbedding (string);
-  const q = `SELECT body FROM posts ORDER BY embedding <-> '${[pgvector.toSql(embedding)]}' LIMIT 5`;
+  const q = `SELECT body FROM ${table} ORDER BY embedding <-> '${[pgvector.toSql(embedding)]}' LIMIT 5`;
   const result = await pgClient.query(q);
-  console.log('result', result);
+  return result.rows;
+}
+
+// Program code goes here
+const run = async () => {
+    const result = await getNearestNeighbors('hello earth');
+    console.log('hello earth result', result);
 }
 
 // connect to postgres database
@@ -69,19 +83,9 @@ const connectToPostgres = async () => {
   await pgClient.connect();
   try {
     await pgvector.registerType(pgClient);
-    connectedFlag = true;
+    run();
   } catch (error) {
     console.log(error);
   } 
 }
-
 connectToPostgres();
-
-const run = async () => {
-  if (!connectedFlag) return;
-  await getNearestNeighbors('hello earth');
-}
-
-// give program 2 seconds to make the postgres connection and then run
-setTimeout(run, 2000);
-
