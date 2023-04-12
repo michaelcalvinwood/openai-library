@@ -78,7 +78,7 @@ const run = async () => {
     console.log('hello earth result', result);
 }
 
-// connect to postgres database
+// connect to postgres database and then launch program
 const connectToPostgres = async () => {
   await pgClient.connect();
   try {
