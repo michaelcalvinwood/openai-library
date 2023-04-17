@@ -2,22 +2,30 @@ const { OpenAI} = require ("langchain/llms/openai");
 const { Configuration, OpenAIApi } = require("openai");
 const p = require ("promptable");
 
-require("dotenv").config;
+require("dotenv").config();
 
 
 const embedding = async (input) => {
     const configuration = new Configuration({
-        apiKey: process.env.OPENAI_API_KEY,
+        apiKey: process.env.MCW_OPENAI_KEY,
       });
+
       const openai = new OpenAIApi(configuration);
       const embeddingResponse = await openai.createEmbedding({
         model: 'text-embedding-ada-002',
         input,
       })
+
+      console.log(embeddingResponse);
   
       const [{ embedding }] = embeddingResponse.data.data
+
+      console.log('neurology', embedding);
+      
       return embedding;
 }
+
+embedding('Alison Dery has amazing patience with her coworker.');
 
 const run = async () => {
 
@@ -47,4 +55,4 @@ function splitWords(string, chunk = 400, overlap = 200) {
 
 //embedding ('hello')
 
-splitWords('Hello, how are you doing my friend? We have so many things to talk about!');
+//splitWords('Hello, how are you doing my friend? We have so many things to talk about!');

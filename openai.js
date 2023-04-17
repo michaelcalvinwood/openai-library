@@ -8,6 +8,54 @@ const axios = require('axios');
 */
 
 
+async function chatCompletion () {
+    /* 
+     * NO NEED TO SPECIFY MAX TOKENS
+     * role: assistant, system, user
+     */
+
+    const prompt = `
+        Write a detailed blog post about the joys of raising pitbulls,
+        limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, li, ol, ul, i
+    `
+
+    const request = {
+        url: 'https://api.openai.com/v1/chat/completions',
+        method: 'post',
+        headers: {
+            'Authorization': `Bearer ${process.env.MCW_OPENAI_KEY}`,
+            'OpenAI-Organization': process.env.MCW_OPENAI_ORG_ID
+        },
+        data: {
+            model: "gpt-3.5-turbo",
+            temperature: 0,
+            messages:[
+                {
+                    role: 'system',
+                    content: 'You are a blog post generator',
+
+                },
+                {
+                    role: 'user',
+                    content: prompt
+                }
+            ]
+        }
+    }
+
+    let response;
+
+    try {
+        response = await axios(request);
+        console.log(response.data.choices[0].message);
+    } catch (e) {
+        console.error(e.response.data);
+    }
+}
+
+chatCompletion();
+
+
 // completions API: https://beta.openai.com/docs/api-reference/completions
 async function openAICompletionTest (prompt, keyword = false) {
     if (keyword) prompt += ` Optimize the SEO value of your response for the keyword '${keyword}'.`;
@@ -180,8 +228,8 @@ async function generateBlogPost (topic, keywords, specialInstructions) {
 
 //openAICompletionTest('Explain why dogs make great pets.', 'Twitter');
 
-generateBlogPost(
-    '5 Best Places to Visit in Europe',
-    'European Vacation, European Tourism',
-    'The response must include the name of at least one restaurant, one hotel, and one tourist attraction for each place.'
-)
+// generateBlogPost(
+//     '5 Best Places to Visit in Europe',
+//     'European Vacation, European Tourism',
+//     'The response must include the name of at least one restaurant, one hotel, and one tourist attraction for each place.'
+// )
