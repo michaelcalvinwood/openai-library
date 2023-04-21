@@ -8,16 +8,13 @@ const axios = require('axios');
 */
 
 
-async function chatCompletion () {
+async function chatCompletion (prompt) {
     /* 
      * NO NEED TO SPECIFY MAX TOKENS
      * role: assistant, system, user
      */
 
-    const prompt = `
-        Write a detailed blog post about the joys of raising pitbulls,
-        limited to the following HTML tags: p, h1, h2, h3, h4, h5, h6, strong, li, ol, ul, i
-    `
+
 
     const request = {
         url: 'https://api.openai.com/v1/chat/completions',
@@ -53,7 +50,29 @@ async function chatCompletion () {
     }
 }
 
-chatCompletion();
+let prompt = `Give three interesting titles for an article about the joys of raising pitbulls and also give five topic headings for the article. The return format must be stringified JSON in the following format: {
+    "titles": array of interesting titles here
+    "headings": array of topic headings here
+}`
+
+prompt = `"""Answer the question as truthfully as possible using the provided contexts, and if the answer cannot be found by combining the contexts below, say "I don't know". Also state all the context numbers that helped to provide you with the answer. The return format must be stringified JSON in the following format: {
+    "answer": answer goes here
+    "provider": array of the context numbers that provided you the answer here
+}
+
+Context 1:
+Hawaiians are happy because of the weather.
+
+Context 2:
+Hawaiians are glad because of their philosophy.
+
+Context 3:
+Hawaiians eat pineapples.
+
+Question: What makes the residents of Hawaii happy?
+"""\n`;
+
+chatCompletion(prompt);
 
 
 // completions API: https://beta.openai.com/docs/api-reference/completions
