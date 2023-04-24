@@ -4,5 +4,11 @@ Write me a 400 word description for {an adult bowser costume}, optimize it for t
 
 Give it a fun voice and include 5 bullet points {that it's great for parties, that our company "MyPartShirt.com" offers two day shipping and phone customer support.}
 
+// after response
+
+Make this funnier and include that the costume is made out of polyester and hard durable plastic in the product description.
+
+
+
 NOTE: You can use SEMRush or AHrefs for keyword research.
 
