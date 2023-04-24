@@ -1,0 +1,11 @@
+Once chatgpt returns initial product description.
+
+This is great. Make it {funnier} and make it more appealing to {a 20-45 year old audience}!
+
+{get response}
+
+This is great. Optimize it for the following keywords: {"Comma separated keywords"}.
+
+{get response}
+
+This is great. Write this again but include a section with bullet points that will convince 20-45 year old consumers to buy. Give it a humerous tone. 

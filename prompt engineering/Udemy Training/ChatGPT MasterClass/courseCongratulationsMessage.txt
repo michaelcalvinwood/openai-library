@@ -1,0 +1,5 @@
+Write me a congratulations message for new students who have finished a ChatGPT course. Congratulate them on their dedication and encourage them to post their certificates of completion on their social medias.
+
+{response}
+
+Possible followup: Make this 100 words shorter and give it a more dynamic tone.

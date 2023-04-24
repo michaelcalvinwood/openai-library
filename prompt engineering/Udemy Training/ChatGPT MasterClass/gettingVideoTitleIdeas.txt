@@ -1,0 +1,6 @@
+Write me 20 fun video titles that would be in a ChatGPT course focused on on-line business creation and optimization.
+
+Then take one of the titles:
+
+Write me a dynamic fun 1000 word script for a video titled: {title}
+
