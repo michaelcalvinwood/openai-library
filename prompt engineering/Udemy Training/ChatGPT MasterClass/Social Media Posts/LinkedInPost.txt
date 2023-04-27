@@ -1,1 +1,5 @@
 Write me a 250 word Linkedin post in a very personable and friendly/familiar style promoting the launch of my new ChatGPT MasterClass.
+
+{response}
+
+This is great. Rewrite it and make it a little funnier and include that the main features of ChatGPT are going to be really incredible e-commerce content creation, great social media posts, and automation of things like email and copywriting.
