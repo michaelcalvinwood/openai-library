@@ -1,5 +1,5 @@
 Respond to the following job posting.
 
-Job Posting: "{}"
+Job Posting: "{copy job posting here}"
 
 Say that {give some specifics here, e.g. I am ___ with the following skills ___. I would like to discuss personally how I can assist.}
