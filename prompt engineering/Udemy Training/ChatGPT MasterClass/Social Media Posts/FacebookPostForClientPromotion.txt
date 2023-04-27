@@ -1,0 +1,14 @@
+Write me a 250 word facebook post promoting a rap show.
+
+I'm promoting a show on Friday night for famous rapper "21 Savage". Include details such as we're giving away two tickets to a random person who likes this post and comments "21" in the comments section.
+
+The show is Friday at Continental Club. Starts at 7:00 PM. And tickets are for sale through the Continental Club website.
+
+{response}
+
+Make this shorter and make the verbage more appealing to 18-25 year olds.
+
+{response}
+
+Write a short snappy Instagram caption for this same show, promoting the same giveaway.
+
