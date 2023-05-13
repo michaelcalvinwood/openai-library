@@ -8,8 +8,9 @@ const axios = require('axios');
 */
 
 
-async function gpt35TurboSingleShot (prompt, systemService = 'You are a helpful assistant', temperature = 0) {
+const sleep = seconds => new Promise(r => setTimeout(r, seconds * 1000));
 
+async function gpt35TurboSingleShot (prompt, temperature = 0, maxCount = 1, systemService = 'You are a helpful assistant') {
     const request = {
         url: 'https://api.openai.com/v1/chat/completions',
         method: 'post',
@@ -36,18 +37,25 @@ async function gpt35TurboSingleShot (prompt, systemService = 'You are a helpful 
 
     let response;
     let answer;
+    let count = 1;
+    let sleepTime = 15;
+    
+    while (count <= maxCount) {
+        ++count;
+        sleepTime *= 2;
 
-    try {
-        response = await axios(request);
-        answer = response.data.choices[0].message;
-        
-    } catch (e) {
-        console.error(e.response.data);
-        return false;
+        try {
+            response = await axios(request);
+            answer = response.data.choices[0].message;
+            console.log('gpt35TurboSingleShot', answer);
+            return answer;        
+        } catch (e) {
+            console.error(e.response.data);
+            await sleep(sleepTime);
+        }
     }
 
-    console.log('gpt35TurboSingleShot', answer);
-    return answer;
+    return false;
 }
 
 let prompt = `Give three interesting titles for an article about the joys of raising pitbulls and also give five topic headings for the article. The return format must be stringified JSON in the following format: {
