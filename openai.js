@@ -8,13 +8,7 @@ const axios = require('axios');
 */
 
 
-async function chatCompletion (prompt) {
-    /* 
-     * NO NEED TO SPECIFY MAX TOKENS
-     * role: assistant, system, user
-     */
-
-
+async function gpt35TurboSingleShot (prompt, systemService = 'You are a helpful assistant', temperature = 0) {
 
     const request = {
         url: 'https://api.openai.com/v1/chat/completions',
@@ -25,11 +19,11 @@ async function chatCompletion (prompt) {
         },
         data: {
             model: "gpt-3.5-turbo",
-            temperature: 0,
+            temperature,
             messages:[
                 {
                     role: 'system',
-                    content: 'You are a blog post generator',
+                    content: systemService,
 
                 },
                 {
@@ -41,13 +35,19 @@ async function chatCompletion (prompt) {
     }
 
     let response;
+    let answer;
 
     try {
         response = await axios(request);
-        console.log(response.data.choices[0].message);
+        answer = response.data.choices[0].message;
+        
     } catch (e) {
         console.error(e.response.data);
+        return false;
     }
+
+    console.log('gpt35TurboSingleShot', answer);
+    return answer;
 }
 
 let prompt = `Give three interesting titles for an article about the joys of raising pitbulls and also give five topic headings for the article. The return format must be stringified JSON in the following format: {
@@ -55,7 +55,7 @@ let prompt = `Give three interesting titles for an article about the joys of rai
     "headings": array of topic headings here
 }`
 
-chatCompletion(prompt);
+gpt35TurboSingleShot(prompt);
 
 
 // completions API: https://beta.openai.com/docs/api-reference/completions
