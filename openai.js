@@ -55,23 +55,6 @@ let prompt = `Give three interesting titles for an article about the joys of rai
     "headings": array of topic headings here
 }`
 
-prompt = `"""Answer the question as truthfully as possible using the provided contexts, and if the answer cannot be found by combining the contexts below, say "I don't know". Also state all the context numbers that helped to provide you with the answer. The return format must be stringified JSON in the following format: {
-    "answer": answer goes here
-    "provider": array of the context numbers that provided you the answer here
-}
-
-Context 1:
-Hawaiians are happy because of the weather.
-
-Context 2:
-Hawaiians are glad because of their philosophy.
-
-Context 3:
-Hawaiians eat pineapples.
-
-Question: What makes the residents of Hawaii happy?
-"""\n`;
-
 chatCompletion(prompt);
 
 
