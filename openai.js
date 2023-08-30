@@ -58,12 +58,9 @@ async function gpt35TurboSingleShot (prompt, temperature = 0, maxCount = 1, syst
     return false;
 }
 
-let prompt = `Give three interesting titles for an article about the joys of raising pitbulls and also give five topic headings for the article. The return format must be stringified JSON in the following format: {
-    "titles": array of interesting titles here
-    "headings": array of topic headings here
-}`
 
-gpt35TurboSingleShot(prompt);
+
+//gpt35TurboSingleShot(prompt);
 
 
 // completions API: https://beta.openai.com/docs/api-reference/completions

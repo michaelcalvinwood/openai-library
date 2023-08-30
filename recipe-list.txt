@@ -1,0 +1,10 @@
+extractRelevantFactsFromTextBasedOnSummary (summary, information)
+
+extractRelevantFactsFromTextBasedOnTopic (topic, information)
+
+answerQuestionBasedOnProvidedContexts (question, contextsArray)
+
+oneParagraphSummaryOfHTMLContent (htmlContent)
+
+titlesAndHeadingsForTopic (topic, numTitles = 3, numHeadings = 5)
+
